@@ -1,0 +1,9 @@
+<% if @user.blank? %>
+  Cannot find user. Please try again.
+<% else %>
+  <h3>Profile:</h3>
+  <p>
+    Username: <%= @user.username %><br>
+    Name: <%= @user.name %>
+  </p>
+<% end %>
