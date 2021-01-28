@@ -1,2 +1,11 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<h3>Friend Feed</h3>
+
+<p>
+  <% unless user_signed_in? %>
+    Please sign in to view your feed or create an account to get started.<br>
+    <%= link_to "Sign in", new_user_session_path %><br>
+    <%= link_to "Create account", new_user_registration_path %>
+  <% else %>
+    <!-- Placeholder. -->
+  <% end %>
+</p>
