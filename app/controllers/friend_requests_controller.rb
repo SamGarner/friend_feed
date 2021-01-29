@@ -1,4 +1,8 @@
 class FriendRequestsController < ApplicationController
+  def index
+    redirect_back(fallback_location: root_path)
+  end
+
   def create
     @new_request = FriendRequest.new(friend_request_params)
     if @new_request.save
