@@ -37,6 +37,9 @@ gem 'figaro', '~> 1.1', '>= 1.1.1'
 # SimpleForm for more concise form build
 gem 'simple_form', '~> 5.0', '>= 5.0.3'
 
+# CSS framework
+gem 'bulma-rails', '~> 0.9.1'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
