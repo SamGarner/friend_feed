@@ -1,5 +1,7 @@
 <% flash.each do |type, message| %>
-  <%= message unless message == "Signed in successfully." %>
+  <div class="notification is-primary">
+    <%= message unless message == "Signed in successfully." %>
+  </div>
 <% end %>
 
 <% if @user.blank? %>
