@@ -2,8 +2,9 @@ class FriendRequestsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @current_user = current_user
-    @requests_sent = FriendRequest.pending_sent_requests(@current_user.id)
+    @current_user_id = current_user.id
+    @requests_sent = FriendRequest.sent_requests(@current_user_id)
+    @requests_received = FriendRequest.received_requests(@current_user_id)
   end
 
   def create

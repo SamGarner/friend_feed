@@ -1,0 +1,22 @@
+<h3>Your Friend Requests</h3><br>
+
+Received:<br>
+  <% if @requests_received.empty? %>
+    No pending requests.
+  <% else %>
+    <% @requests_received.each do |request| %>
+      <%= request.sender.name %><br>
+    <% end %>
+  <% end %>  
+
+<br>
+
+Sent:<br>
+  <% if @requests_sent.empty? %>
+    No outstanding sent requests.
+  <% else %>
+    <% @requests_sent.each do |request| %>
+      <%= request.receiver.name %><br>
+    <% end %>
+  <% end %>  
+
