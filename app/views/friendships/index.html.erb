@@ -3,7 +3,7 @@
 <h3>Friends</h3><br>
  <!-- placeholder -->
 
-<h3>Friend Requests</h3>
-<%= render partial: 'received_requests', locals: { requests_received: @requests_received } %>
-<%= render partial: 'sent_requests', locals: { requests_sent: @requests_sent } %>
+<!-- <h3>Friend Requests</h3> -->
+<%= render partial: 'shared/received_requests', locals: { requests_received: @requests_received } %>
+<%= render partial: 'shared/sent_requests', locals: { requests_sent: @requests_sent } %>
 <%#= render 'sent_requests'%>
