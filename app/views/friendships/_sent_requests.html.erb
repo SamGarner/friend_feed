@@ -1,0 +1,8 @@
+Sent:<br>
+  <% if @requests_sent.empty? %>
+    No outstanding sent requests.
+  <% else %>
+    <% @requests_sent.each do |request| %>
+      <%= request.receiver.name %><br>
+    <% end %>
+  <% end %>  

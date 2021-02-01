@@ -1,0 +1,5 @@
+<% flash.each do |type, message| %>
+  <div class="notification is-primary">
+    <%= message unless message == "Signed in successfully." %>
+  </div>
+<% end %>

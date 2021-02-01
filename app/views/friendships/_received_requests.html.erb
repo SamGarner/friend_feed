@@ -1,0 +1,15 @@
+Received:<br>
+  <% if requests_received.empty? %>
+    No pending requests.
+    <br>
+  <% else %>
+    <% requests_received.each do |request| %>
+      <%= request.sender.name %>
+      <%#= form_with model: request, method: :patch do |f| %>
+      <%= simple_form_for request, method: :patch do |f| %>
+        <%= f.submit "Accept" %>
+        <%= f.submit "Reject" %>
+      <% end %>    
+      <br>
+    <% end %>
+  <% end %>
