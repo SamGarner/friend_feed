@@ -1,0 +1,24 @@
+<% unless @requests_received.empty? || @likes || @comments %>
+  <% unless @requests_received.empty? %>
+    <%#= "#{@requests_received.count} new friend requests." %>
+    <%= "#{pluralize(@requests_received.count, 'new friend request')}." %>
+  <% end %>
+  
+  <!-- placeholder -->
+  <% if @likes %>
+    <%= "#{@likes} new likes." %>
+  <% end %>
+
+  <!-- placeholder -->
+  <% if @comments %>
+    <%= "#{@comments} new comments." %>
+  <% end %>
+<% else %>
+  No updates at this time.
+<% end %>
+
+<br><br>
+<!-- New Friend Requests: -->
+<% unless @requests_received.empty? %>
+  <%= render partial: 'shared/received_requests', locals: { requests_received: @requests_received } %>
+<% end %>
