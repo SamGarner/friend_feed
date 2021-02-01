@@ -1,15 +1,15 @@
-<% unless @requests_received.empty? || @likes || @comments %>
+<% unless @requests_received.empty? # && @likes.empty? && @comments.empty? %>
   <% unless @requests_received.empty? %>
     <%#= "#{@requests_received.count} new friend requests." %>
     <%= "#{pluralize(@requests_received.count, 'new friend request')}." %>
   <% end %>
   
-  <!-- placeholder -->
+  <!-- placeholder, uncomment .empty? in initial 'unless' once built -->
   <% if @likes %>
     <%= "#{@likes} new likes." %>
   <% end %>
 
-  <!-- placeholder -->
+  <!-- placeholder, uncomment .empty? in initial 'unless' once built  -->
   <% if @comments %>
     <%= "#{@comments} new comments." %>
   <% end %>
