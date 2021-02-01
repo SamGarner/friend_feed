@@ -12,4 +12,5 @@ class User < ApplicationRecord
   has_many :received_requests, foreign_key: 'receiver_id', class_name: 'FriendRequest'
   has_many :sent_friendships, foreign_key: 'sender_id', class_name: 'Friendship'
   has_many :received_friendships, foreign_key: 'receiver_id', class_name: 'Friendship'
+  has_many :notifications
 end
