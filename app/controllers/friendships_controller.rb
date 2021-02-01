@@ -8,6 +8,10 @@ class FriendshipsController < ApplicationController
     @friendship = Friendship.new
   end
 
+# BAD - DO NOT NAME ACTIONS 'REQUEST'
+  # def request
+  # end
+
   def create
     @new_request = Friendship.new(friend_request_params)
     if @new_request.save
@@ -22,11 +26,24 @@ class FriendshipsController < ApplicationController
     end
   end
 
-  private
-
-  def accepted_request_params
-    params.require(:friendship).permit(:sender_id, :receiver_id, :button)
+  def update
+    @request = Friendship.find(params[:id])
+    @friend = @request.sender
+    if params[:commit] == 'Accept'
+      @request.update(is_request: false)
+      flash[:success] = "You are now friends with #{@friend.name}!"
+      redirect_to @friend
+    elsif params[:commit] == 'Reject'
+      @request.destroy
+      @requests_received = Friendship.received_requests(current_user.id)
+      @requests_sent = Friendship.sent_requests(current_user.id)
+      flash[:success] = "#{@friend.name}'s friend request has been rejected."
+      # render 'index'
+      redirect_to friendships_path
+    end
   end
+
+  private
 
   def friend_request_params
     params.require(:friendship).permit(:sender_id, :receiver_id)

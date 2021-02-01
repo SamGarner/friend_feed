@@ -14,9 +14,10 @@
 
     <% if @friend_request %>
       <%= simple_form_for @friend_request do |f| %>
+      <%#= form_with model: @friend_request do |f| %>
         <%= f.hidden_field :sender_id, value: current_user.id %>
         <%= f.hidden_field :receiver_id, value: @user.id %>
-        <%= f.button :submit, "Send Friend Request" %>
+        <%= f.submit "Send Friend Request" %>
       <% end %>
     <% end %>
   </p>

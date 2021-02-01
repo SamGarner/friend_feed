@@ -1,5 +1,5 @@
 <h3>Friends</h3><br>
-  
+ <!-- placeholder -->
 
 <h3>Friend Requests</h3>
 Received:<br>
@@ -8,16 +8,14 @@ Received:<br>
   <% else %>
     <% @requests_received.each do |request| %>
       <%= request.sender.name %>
-      <%= simple_form_for @friendship do |f| %>
-        <%= f.hidden_field :receiver_id, value: current_user.id %>
-        <%= f.hidden_field :sender_id, value: request.sender.id %>
-        <%= f.button :button, "Accept" %>
-        <%= f.button :button, "Reject" %>
-      <% end %>   
+      <%#= form_with model: request, method: :patch do |f| %>
+      <%= simple_form_for request, method: :patch do |f| %>
+        <%= f.submit "Accept" %>
+        <%= f.submit "Reject" %>
+      <% end %>    
       <br>
     <% end %>
   <% end %>
-
 <br>
 
 Sent:<br>
