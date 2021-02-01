@@ -13,7 +13,8 @@
       <% if user_signed_in? %>
         <%= link_to(current_user.name, user_path(current_user), class: "navbar-item") %>
         <!-- temp link to root path until search is built out -->
-        <%= link_to("Search", root_path, class: "navbar-item") %> 
+        <%= link_to("Search", root_path, class: "navbar-item") %>
+        <%= link_to("Notifications", notifications_path, class: "navbar-item") %> 
       <% end %>
     </div>
 
