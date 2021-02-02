@@ -20,10 +20,10 @@ class PostsController < ApplicationController
     @user = current_user
     @post = @user.posts.build(new_post_params)
     if @post.save
-      flash[:success] = 'Your post has been published!'
+      flash[:notice] = 'Your post has been published!'
       redirect_to @post
     else
-      flash.now[:error] = 'There was an issue publishing your post. Please try again.'
+      flash.now[:alert] = 'There was an issue publishing your post. Please try again.'
       render 'new'
     end
   end
