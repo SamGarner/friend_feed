@@ -1,2 +1,11 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+ <div class="column is-half"> 
+  <div class="card is-half">
+    <div class="card-content">
+      <%= @post.content %><br><br>
+    </div>
+    <div class="card-footer">
+      <%= @post.user.name %> - 
+      <%= @post.created_at.strftime('%k:%M %b %-d, %Y') %>
+    </div>  
+  </div>
+</div> 
