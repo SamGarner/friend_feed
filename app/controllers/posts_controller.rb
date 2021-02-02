@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
   end
 
@@ -6,6 +8,9 @@ class PostsController < ApplicationController
   end
 
   def new
+    # @user = current_user
+    # @post = @user.posts.build
+    @post = Post.new
   end
 
   def create

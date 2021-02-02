@@ -1,2 +1,23 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<h3>New Post:</h3>
+
+<div class="column is-half rows:10">
+<%= simple_form_for @post do |f| %>
+  <div class="field">
+    <div class="control">
+      <%= f.input :content, label: "What's on your mind?", input_html: { class: "textarea is-primary" }, wrapper: false %>
+    </div>
+  </div>
+<%= f.button :submit, "Post", class: "button is-small is-primary" %>
+<% end %>
+</div>
+
+<!--   <textarea class="textarea is-primary" placeholder="Primary textarea"> -->
+    <%#= simple_form_for @post do |f| %>
+      
+      <%#= f.input_field :content, label: "What's on your mind?", input_html: { class: "column is-half rows:10" } %>
+      
+      <%#= f.button :submit, "Post" %>
+    <%# end %>
+<!--   </textarea>
+</div> 
+ -->
