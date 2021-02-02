@@ -14,4 +14,15 @@ class Friendship < ApplicationRecord
   def self.received_requests(user_id)
     Friendship.where('receiver_id = ? AND is_request = ?', user_id, true)
   end
+
+  def self.friends(user_id)
+    friendships = Friendship.where('(receiver_id = ? OR sender_id = ?) AND is_request = ?',
+                                   user_id, user_id, false)
+    friend_ids = []
+    friendships.each do |friendship|
+      friend_ids << friendship.sender_id
+      friend_ids << friendship.receiver_id
+    end
+    friend_ids.uniq
+  end
 end

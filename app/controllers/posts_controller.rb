@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
 
   def index
+    @friend_ids = Friendship.friends(current_user)
+    @timeline_posts = Post.fetch_users_posts(@friend_ids)
   end
 
   def show

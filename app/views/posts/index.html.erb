@@ -1,11 +1,24 @@
-<h3>Friend Feed</h3>
+<!-- <h3>Friend Feed</h3> -->
 
-<p>
   <% unless user_signed_in? %>
     Please sign in to view your feed or create an account to get started.<br>
-    <%= link_to "Sign in", new_user_session_path %><br>
-    <%= link_to "Create account", new_user_registration_path %>
+    <%#= link_to "Sign in", new_user_session_path %>
+    <!-- <br> -->
+    <%#= link_to "Create account", new_user_registration_path %>
   <% else %>
-    <!-- Placeholder. -->
+    <div class="columns is-centered">
+       <div class="column is-half"> 
+            <% @timeline_posts.each do |post| %>
+              <div class="card is-half">
+                <div class="card-content">
+                  <%= post.content %><br><br>
+                </div>
+                <div class="card-footer">
+                  <%= post.user.name %> - 
+                  <%= post.created_at.strftime('%k:%M %b %-d, %Y') %><br>
+                </div>
+              </div><br>
+            <% end %>  
+      </div>
+    </div>
   <% end %>
-</p>
