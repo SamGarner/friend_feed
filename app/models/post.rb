@@ -10,6 +10,6 @@ class Post < ApplicationRecord
     user_ids.each do |user_id|
       timeline_posts << Post.where('user_id = ?', user_id)
     end
-    timeline_posts.flatten
+    timeline_posts.flatten.sort_by(&:created_at).reverse!
   end
 end
