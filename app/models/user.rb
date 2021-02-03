@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   has_many :posts
   has_many :comments
+  has_many :likes
   # has_many :sent_requests, foreign_key: 'sender_id', class_name: 'FriendRequest'
   # has_many :received_requests, foreign_key: 'receiver_id', class_name: 'FriendRequest'
   has_many :sent_friendships, foreign_key: 'sender_id', class_name: 'Friendship'
