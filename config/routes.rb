@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   # resources :friend_requests, only: [:index, :create, :destroy]
   resources :friendships, only: [:index, :create, :update, :destroy]
   resources :notifications, only: :index
+  resources :comments, only: [:index, :create, :edit, :update, :destroy]
   root 'posts#index'
 end

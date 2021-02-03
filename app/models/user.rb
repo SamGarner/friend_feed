@@ -8,6 +8,7 @@ class User < ApplicationRecord
          :timeoutable, :trackable # non-default modeuls
 
   has_many :posts
+  has_many :comments
   # has_many :sent_requests, foreign_key: 'sender_id', class_name: 'FriendRequest'
   # has_many :received_requests, foreign_key: 'receiver_id', class_name: 'FriendRequest'
   has_many :sent_friendships, foreign_key: 'sender_id', class_name: 'Friendship'
