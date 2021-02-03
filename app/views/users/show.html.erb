@@ -1,21 +1,55 @@
-<% if @user.blank? %>
+
+<!-- <div class="container"> -->
+<div class="columns is-centered">
+  <div class="column is-one-third">
+    <div class="card">
+      <% if @user.blank? %>
+        Cannot find user. Please try again.
+      <% else %>
+      <div class="card-header-title">
+        <%= @user.username.capitalize %>
+      </div>
+      <div class="card-image">
+        <div class='image is-128x128'>
+          <%= image_tag(@user.avatar) %>
+        </div>
+      </div>
+      <div class="card-content">
+        Username: <%= @user.username %><br>
+        Name: <%= @user.name %>
+        <% if @friend_request %>
+          <%= simple_form_for @friend_request do |f| %>
+          <%#= form_with model: @friend_request do |f| %>
+            <%= f.hidden_field :sender_id, value: current_user.id %>
+            <%= f.hidden_field :receiver_id, value: @user.id %>
+            <%= f.submit "Send Friend Request", class: 'button is-outlined is-small is-primary' %>
+          <% end %>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%# if @user.blank? %>
+<!--   
   Cannot find user. Please try again.
-<% else %>
+<%# else %>
   <h3>Profile:</h3>
-  <% if @user.avatar.attached? %>
+  <%# if @user.avatar.attached? %>
     <%= image_tag(@user.avatar) %>
-  <% end %>
+  <%# end %>
   <p>
     Username: <%= @user.username %><br>
     Name: <%= @user.name %>
 
-    <% if @friend_request %>
-      <%= simple_form_for @friend_request do |f| %>
+    <%# if @friend_request %>
+      <%#= simple_form_for @friend_request do |f| %>
       <%#= form_with model: @friend_request do |f| %>
-        <%= f.hidden_field :sender_id, value: current_user.id %>
-        <%= f.hidden_field :receiver_id, value: @user.id %>
-        <%= f.submit "Send Friend Request" %>
-      <% end %>
-    <% end %>
+        <%#= f.hidden_field :sender_id, value: current_user.id %>
+        <%#= f.hidden_field :receiver_id, value: @user.id %>
+        <%#= f.submit "Send Friend Request" %>
+      <%# end %>
+    <%# end %>
   </p>
-<% end %>
+<%# end %>
