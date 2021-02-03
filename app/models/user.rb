@@ -15,4 +15,5 @@ class User < ApplicationRecord
   has_many :sent_friendships, foreign_key: 'sender_id', class_name: 'Friendship'
   has_many :received_friendships, foreign_key: 'receiver_id', class_name: 'Friendship'
   has_many :notifications
+  has_one_attached :avatar
 end

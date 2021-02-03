@@ -2,6 +2,9 @@
   Cannot find user. Please try again.
 <% else %>
   <h3>Profile:</h3>
+  <% if @user.avatar.attached? %>
+    <%= image_tag(@user.avatar) %>
+  <% end %>
   <p>
     Username: <%= @user.username %><br>
     Name: <%= @user.name %>

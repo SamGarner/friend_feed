@@ -1,0 +1,9 @@
+<%= form_with model: @user do |f| %>
+  <%= f.file_field :avatar %><br>
+  <%= f.submit :upload, class: 'button is-small is-outlined' %>
+<% end %>
+
+<%#= simple_form_for @user do |f| %>
+  <%#= f.input :avatar, label: false, as: :file, input_html: {} %>
+  <%#= f.submit :upload %>
+<%# end %>
