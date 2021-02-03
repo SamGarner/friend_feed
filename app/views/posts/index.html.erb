@@ -1,28 +1,48 @@
 <!-- <h3>Friend Feed</h3> -->
-
-<% unless user_signed_in? %>
-  Please sign in to view your feed or create an account to get started.<br>
-  <%#= link_to "Sign in", new_user_session_path %>
-  <!-- <br> -->
-  <%#= link_to "Create account", new_user_registration_path %>
-<% else %>
-  <div class="columns is-centered">
-    <div class="column is-half"> 
-      <% @timeline_posts.each do |post| %>
-        <div class="card is-half">
-          <div class="card-content">
-            <%= post.content %><br><br>
-          </div>
-          <div class="card-footer">
-            <%= post.user.name %> - 
-            <%= post.created_at.strftime('%k:%M %b %-d, %Y') %><br>
-            <%= pluralize(post.likes.count, 'like') %> 
-            <% post.likes.each do |like| %>
-              - <%= like.user.name %>
-            <% end %>
-          </div>
-        </div><br>
-      <% end %>  
+<div class="has-background-light">
+  <% unless user_signed_in? %>
+    Please sign in to view your feed or create an account to get started.<br>
+    <%#= link_to "Sign in", new_user_session_path %>
+    <!-- <br> -->
+    <%#= link_to "Create account", new_user_registration_path %>
+  <% else %>
+    <div class="columns is-centered">
+      <div class="column is-half"> 
+        <% @timeline_posts.each do |post| %>
+          <div class="card is-half">
+            <div class="card-content">
+              <%= post.content %>
+              <br><br>
+            </div>
+            <div class="card-footer">
+                <%= post.user.name %> - 
+                <%= post.created_at.strftime('%k:%M %b %-d, %Y') %>
+            </div>
+              <div class="is-size-7 has-text-left">
+                <%= pluralize(post.likes.count, 'like') %> 
+                <% post.likes.each do |like| %>
+                  - <%= like.user.name %>
+                <% end %>
+                <br>
+                <%= pluralize(post.comments.count, "comment") %>:
+                <br>
+                <% post.comments.each do |comment| %>
+                  <%= comment.content %>
+                  -<%= comment.user.name %>
+                  <br>
+                <% end %>
+              </div>
+            <div class="column is-9">
+              <%= simple_form_for current_user.comments.build do |f| %>
+                <%= f.input_field :content, label: false, class: 'input is-small' %>
+                <%= f.hidden_field :commentable_id, value: post.id %>
+                <%= f.hidden_field :commentable_type, value: Post %>
+                <%= f.submit 'Post Comment', class: 'button is-outlined is-small is-primary' %>
+              <% end %>
+            </div>
+          </div><br>
+        <% end %>  
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
