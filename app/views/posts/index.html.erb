@@ -17,6 +17,11 @@
             <div class="card-footer">
                 <%= post.user.name %> - 
                 <%= post.created_at.strftime('%k:%M %b %-d, %Y') %>
+                <%= simple_form_for current_user.likes.build do |f| %>
+                  <%= f.hidden_field :likable_id, value: post.id %>
+                  <%= f.hidden_field :likable_type, value: Post %>
+                  <%= f.submit 'Like', class: 'button is-outlined is-small is-primary' %>
+              <% end %>
             </div>
               <div class="is-size-7 has-text-left">
                 <%= pluralize(post.likes.count, 'like') %> 
