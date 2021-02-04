@@ -1,12 +1,17 @@
-<% @all_users.each do |user| %>
-  <%= user.name %> -  
-  Profile: <%= link_to(user.username, user) %>
-  <% if @stranger_ids.include?(user.id) %>
-    <%= simple_form_for @friend_request do |f| %>
-    <%#= form_with model: @friend_request do |f| %>
-      <%= f.hidden_field :sender_id, value: current_user.id %>
-      <%= f.hidden_field :receiver_id, value: user.id %>
-      <%= f.submit "Send #{user.name} a friend request", class: 'button is-outlined is-small is-primary' %>
-    <% end %>
-  <% end %><br>
-<% end %>
+<div class="column is-4">
+  <% @all_users.each do |user| %>
+    <% if @stranger_ids.include?(user.id) %>
+      <%= simple_form_for @friend_request do |f| %>
+      <%#= form_with model: @friend_request do |f| %>
+        <%= user.name %> -  
+        Profile: <%= link_to(user.username.capitalize, user) %>
+        <%= f.hidden_field :sender_id, value: current_user.id %>
+        <%= f.hidden_field :receiver_id, value: user.id %>
+        <%= f.submit "Send #{user.name} a friend request", class: 'button is-outlined is-small is-primary' %>
+      <% end %>
+    <% else %>
+      <%= user.name %> -  
+    Profile: <%= link_to(user.username.capitalize, user) %>
+    <% end %><br><br>
+  <% end %>
+</div>
