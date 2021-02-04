@@ -10,8 +10,12 @@ class UsersController < ApplicationController
   end
 
   def show
+    @friend_ids = Friendship.friends(current_user.id)
     @user = User.find(params[:id])
+    @connected_user_ids = Friendship.connections(current_user.id)
+    @stranger_ids = User.fetch_stranger_ids(@connected_user_ids)
     @friend_request = Friendship.new
+    @posts = Post.fetch_users_posts([@user.id])
   end
 
   def edit

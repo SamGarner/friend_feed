@@ -21,7 +21,7 @@
       <div class="card-content">
         Username: <%= @user.username %><br>
         Name: <%= @user.name %>
-        <% if @friend_request %>
+        <% if @friend_request && @stranger_ids.include?(@user.id) %>
           <%= simple_form_for @friend_request do |f| %>
           <%#= form_with model: @friend_request do |f| %>
             <%= f.hidden_field :sender_id, value: current_user.id %>
@@ -32,5 +32,51 @@
       </div>
       <% end %>
     </div>
+    <br>
+
+    <% if @friend_ids.include?(@user.id) %>
+      <% @posts.each do |post| %>
+        <div class="card is-half">
+          <div class="card-content">
+            <%= post.content %>
+            <br><br>
+          </div>
+          <div class="card-footer">
+              <%= post.user.name %> - 
+              <%= post.created_at.strftime('%k:%M %b %-d, %Y') %>
+              <%= simple_form_for current_user.likes.build do |f| %>
+                <%= f.hidden_field :likable_id, value: post.id %>
+                <%= f.hidden_field :likable_type, value: Post %>
+                <%= f.submit 'Like', class: 'button is-outlined is-small is-primary' %>
+            <% end %>
+          </div>
+            <div class="is-size-7 has-text-left">
+              <%= pluralize(post.likes.count, 'like') %> 
+              <% post.likes.each do |like| %>
+                - <%= like.user.name %>
+              <% end %>
+              <br>
+              <%= pluralize(post.comments.count, "comment") %>:
+              <br>
+              <% post.comments.each do |comment| %>
+                <%= comment.content %>
+                -<%= comment.user.name %>
+                <br>
+              <% end %>
+            </div>
+          <div class="column is-9">
+            <%= simple_form_for current_user.comments.build do |f| %>
+              <%= f.input_field :content, label: false, class: 'input is-small' %>
+              <%= f.hidden_field :commentable_id, value: post.id %>
+              <%= f.hidden_field :commentable_type, value: Post %>
+              <%= f.submit 'Post Comment', class: 'button is-outlined is-small is-primary' %>
+            <% end %>
+          </div>
+        </div>
+        <br>
+      <% end %>
+    <% else %>
+      <%= "You must be friends before you can see #{@user.name}'s full profile and posts." %>          
+    <% end %>
   </div>
 </div>
