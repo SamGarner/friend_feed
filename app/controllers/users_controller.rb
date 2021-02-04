@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
+    @user = current_user
+    @connected_user_ids = Friendship.connections(@user.id)
+    @stranger_ids = User.fetch_stranger_ids(@connected_user_ids)
+    @all_users = User.all # adjust for scalability
+    @friend_request = Friendship.new
   end
 
   def show

@@ -16,4 +16,8 @@ class User < ApplicationRecord
   has_many :received_friendships, foreign_key: 'receiver_id', class_name: 'Friendship'
   has_many :notifications
   has_one_attached :avatar
+
+  def self.fetch_stranger_ids(connected_user_ids)
+    User.where.not(id: connected_user_ids).map(&:id)
+  end
 end

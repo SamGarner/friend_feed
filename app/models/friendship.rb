@@ -5,8 +5,6 @@ class Friendship < ApplicationRecord
   belongs_to :sender, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
 
-# private
-
   def self.sent_requests(user_id)
     Friendship.where('sender_id = ? AND is_request = ?', user_id, true)
   end
@@ -24,5 +22,22 @@ class Friendship < ApplicationRecord
       friend_ids << friendship.receiver_id
     end
     friend_ids.uniq
+  end
+
+  def self.connections(user_id)
+    (self.outstanding_requests(user_id) + self.friends(user_id)).uniq
+  end
+
+  private
+
+  def self.outstanding_requests(user_id)
+    pending_friendships = Friendship.where('(receiver_id = ? OR sender_id = ?)
+                                            AND is_request = ?', user_id, user_id, true)
+    pending_friend_ids = []
+    pending_friendships.each do |friendship|
+      pending_friend_ids << friendship.sender_id
+      pending_friend_ids << friendship.receiver_id
+    end
+    pending_friend_ids.uniq
   end
 end
