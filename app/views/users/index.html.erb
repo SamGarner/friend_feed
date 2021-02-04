@@ -1,4 +1,4 @@
-<div class="column is-4">
+<div class="column is-8">
   <% @all_users.each do |user| %>
     <% if @stranger_ids.include?(user.id) %>
       <%= simple_form_for @friend_request do |f| %>
