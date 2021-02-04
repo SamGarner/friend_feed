@@ -11,7 +11,11 @@
       </div>
       <div class="card-image">
         <div class='image is-128x128'>
-          <%= image_tag(@user.avatar) %>
+          <% if @user.avatar.attached? %>
+            <%= image_tag(@user.avatar) %>
+          <% else %>
+            <%= image_tag('icon5.png') %>
+          <% end %>
         </div>
       </div>
       <div class="card-content">
@@ -30,26 +34,3 @@
     </div>
   </div>
 </div>
-
-<%# if @user.blank? %>
-<!--   
-  Cannot find user. Please try again.
-<%# else %>
-  <h3>Profile:</h3>
-  <%# if @user.avatar.attached? %>
-    <%= image_tag(@user.avatar) %>
-  <%# end %>
-  <p>
-    Username: <%= @user.username %><br>
-    Name: <%= @user.name %>
-
-    <%# if @friend_request %>
-      <%#= simple_form_for @friend_request do |f| %>
-      <%#= form_with model: @friend_request do |f| %>
-        <%#= f.hidden_field :sender_id, value: current_user.id %>
-        <%#= f.hidden_field :receiver_id, value: @user.id %>
-        <%#= f.submit "Send Friend Request" %>
-      <%# end %>
-    <%# end %>
-  </p>
-<%# end %>
