@@ -29,7 +29,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # Add Devise for user authentication
-gem 'devise', '~> 4.2'
+# gem 'devise', '~> 4.2'
+gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 
 # Figaro to store private ENV variables
 gem 'figaro', '~> 1.1', '>= 1.1.1'
@@ -37,8 +38,16 @@ gem 'figaro', '~> 1.1', '>= 1.1.1'
 # SimpleForm for more concise form build
 gem 'simple_form', '~> 5.0', '>= 5.0.3'
 
-# CSS framework
+# Bulma CSS framework
 gem 'bulma-rails', '~> 0.9.1'
+
+
+# OAuth
+# gem 'omniauth'#, '~> 1.3', '>= 1.3.1'
+gem "omniauth-rails_csrf_protection"
+
+# Facebook OAuth2 Strategy for OmniAuth.
+gem 'omniauth-facebook'#, '~> 3.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
