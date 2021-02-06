@@ -1,12 +1,13 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable and :omniauthable
-  validates :email, :name, presence: true
+
+  validates :email, :name, presence: true # must receive these values from any OmniAuth provider or remove validation
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :timeoutable, :trackable, # non-default modules
-         :omniauthable, :omniauth_providers => [:facebook]
+         :omniauthable, omniauth_providers: [:facebook]
 
   has_many :posts
   has_many :comments
@@ -22,11 +23,15 @@ class User < ApplicationRecord
     User.where.not(id: connected_user_ids).map(&:id)
   end
 
+  validates :name, presence: true
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
+      user.name = auth.info.name
+      user.username = auth.info.name
       user.password = Devise.friendly_token[0,20]
     end
   end
