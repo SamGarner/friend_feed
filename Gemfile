@@ -43,11 +43,12 @@ gem 'bulma-rails', '~> 0.9.1'
 
 
 # OAuth
-# gem 'omniauth'#, '~> 1.3', '>= 1.3.1'
-gem "omniauth-rails_csrf_protection"
-
 # Facebook OAuth2 Strategy for OmniAuth.
-gem 'omniauth-facebook'#, '~> 3.0'
+gem 'omniauth-facebook', '~> 8.0'
+
+# gem 'omniauth'#, '~> 1.3', '>= 1.3.1'
+gem "omniauth-rails_csrf_protection", '~> 1.0'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
