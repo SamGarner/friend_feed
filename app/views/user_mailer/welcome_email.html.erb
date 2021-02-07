@@ -1,0 +1,12 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3>Welcome to FriendFeed, <%= @user.name.titleize %>!</h3>
+
+    <p>
+      To start connecting with friends, visit the <%= link_to('Sign In', @url) %> page to login.
+    </p>
+  </body>
+</html>
