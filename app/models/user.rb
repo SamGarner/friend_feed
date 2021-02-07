@@ -19,11 +19,11 @@ class User < ApplicationRecord
   has_many :notifications
   has_one_attached :avatar
 
+  after_create :send_welcome_email
+
   def self.fetch_stranger_ids(connected_user_ids)
     User.where.not(id: connected_user_ids).map(&:id)
   end
-
-  validates :name, presence: true
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -34,6 +34,10 @@ class User < ApplicationRecord
       user.username = auth.info.name
       user.password = Devise.friendly_token[0,20]
     end
+  end
+
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver_now
   end
 
   # def self.from_omniauth(auth)
