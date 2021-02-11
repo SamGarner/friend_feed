@@ -120,8 +120,11 @@ Rails.application.configure do
 
   # default url options for Devise
   config.action_mailer.default_url_options = { host: 'friend-feed.herokuapp.com', protocol: 'https' }
-  # letter_opener delivery method
-  config.action_mailer.delivery_method = :smtp
+
+  # config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :sendmail
   config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_options = { from: 'no-reply@example.com' }
 end
-  
+ 
