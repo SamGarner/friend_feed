@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable and :omniauthable
+  require 'open-uri'
 
   validates :email, :name, presence: true # must receive these values from any OmniAuth provider or remove validation
 
@@ -9,14 +10,14 @@ class User < ApplicationRecord
          :timeoutable, :trackable, # non-default modules
          :omniauthable, omniauth_providers: [:facebook]
 
-  has_many :posts
-  has_many :comments
-  has_many :likes
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   # has_many :sent_requests, foreign_key: 'sender_id', class_name: 'FriendRequest'
   # has_many :received_requests, foreign_key: 'receiver_id', class_name: 'FriendRequest'
-  has_many :sent_friendships, foreign_key: 'sender_id', class_name: 'Friendship'
-  has_many :received_friendships, foreign_key: 'receiver_id', class_name: 'Friendship'
-  has_many :notifications
+  has_many :sent_friendships, foreign_key: 'sender_id', class_name: 'Friendship', dependent: :destroy
+  has_many :received_friendships, foreign_key: 'receiver_id', class_name: 'Friendship', dependent: :destroy
+  has_many :notifications, dependent: :destroy
   has_one_attached :avatar
 
   after_create :send_welcome_email
@@ -33,7 +34,36 @@ class User < ApplicationRecord
       user.name = auth.info.name
       user.username = auth.info.name
       user.password = Devise.friendly_token[0,20]
+      # user.avatar = auth.info.picture
+              # unless user.avatar.attached? #(auth.info.picture)
+                # downloaded_image = URI.open(auth.info.picture)
+
+                #upload
+                # user.avatar.attach(io: downloaded_image, filename: 'picture.jpg', content_type: downloaded_image.content_type)
+              # end
+
+      # if auth.info.picture
+      #   downloaded_image = URI.open(auth.info.picture)
+      #   user.avatar.attach(io: downloaded_image,
+      #                      filename: "image-#{Time.now.strftime("%s%L")}",
+      #                      content_type: downloaded_image.content_type)
+      # end
+
+      if auth.info.picture
+        downloaded_image = URI.open(auth.info.picture)
+        user.avatar.attach(io: downloaded_image, filename: 'picture.jpg', content_type: downloaded_image.content_type)
+      end
     end
+
+      # if user.avatar.attached?
+      # else
+      #   # open the link
+      #   downloaded_image = open(auth.info.image)
+
+      #   # upload via ActiveStorage
+      #   # be careful here! the type may be png or other type!
+      #   user.avatar.attach(io: downloaded_image, filename: 'image.jpg', content_type: downloaded_image.content_type)
+      # end
   end
 
   def send_welcome_email
