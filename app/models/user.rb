@@ -49,9 +49,9 @@ class User < ApplicationRecord
       #                      content_type: downloaded_image.content_type)
       # end
 
-      if auth.info.picture
-        downloaded_image = URI.open(auth.info.picture)
-        user.avatar.attach(io: downloaded_image, filename: 'picture.jpg', content_type: downloaded_image.content_type)
+      if auth.info.image
+        downloaded_image = URI.open(auth.info.image)
+        user.avatar.attach(io: downloaded_image, filename: 'image.jpg', content_type: downloaded_image.content_type)
       end
     end
 
