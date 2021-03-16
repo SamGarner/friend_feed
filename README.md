@@ -1,6 +1,6 @@
 # FriendFeed
 
-The alpha version of a social website inspired by Facebook including the familiar concepts of 'liking', 'friending', and a news feed. You can  also sign up and sign in using an existing Facebook account.
+The beginnings of a Rails-based social website inspired by Facebook including the familiar concepts of 'liking', 'friending', and a news feed. You can  also sign up and sign in using an existing Facebook account.
 
 ## Access
 
