@@ -6,12 +6,14 @@
   
   <!-- placeholder, uncomment .empty? in initial 'unless' once built -->
   <% if @likes %>
-    <%= "#{@likes} new likes." %>
+    <!-- use pluralize once @likes is pulling in everything -->
+    <%= "#{@likes} new like." %>
   <% end %>
 
   <!-- placeholder, uncomment .empty? in initial 'unless' once built  -->
   <% if @comments %>
-    <%= "#{@comments} new comments." %>
+    <!-- use pluralize once @comments is pulling in everything -->
+    <%= "#{@comments} new comment." %> 
   <% end %>
 <% else %>
   No updates at this time.
